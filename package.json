@@ -1,0 +1,26 @@
+{
+  "name": "bloodbank",
+  "version": "1.1.5",
+  "description": "blood bank availiablity",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anmol-8/bloodbank.git"
+  },
+  "keywords": [
+    "vm"
+  ],
+  "author": "Ak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anmol-8/bloodbank/issues"
+  },
+  "homepage": "https://github.com/anmol-8/bloodbank#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "path": "^0.12.7"
+  }
+}

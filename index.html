@@ -1,0 +1,121 @@
+ <!DOCTYPE html>
+ <html>    
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Angular Material style sheet -->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+<link rel="stylesheet" href="../app/css/common.css" content="text/css"/> 
+
+<title>Blood Bank</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+<body ng-app="bloodApp" ng-controller="bloodCtrl"  >
+       <form name= "projectForm" autocomplete ="off" novalidate>
+	 <md-content layout="column" layout-align="center center" >
+      <md-card " class="md-padding md-whiteframe-4dp" layout="column" layout-align="center center" >
+				               <md-toolbar>
+					          <div class="md-toolbar-tools">
+					            <div flex></div>
+					            <md-card-header-text layout-align="center center">
+							               <span style="width: 100%;text-align: center" class = "md-title">Blood Group Availability</span>
+							            </md-card-header-text>	
+					          </div>
+					        </md-toolbar>
+			
+																			
+								<md-card-content>
+									<div layout="column">
+										<!-- Blood Group -->
+										<md-input-container flex="50">
+								          <label>Blood Group</label>
+
+								          	
+							<md-select name="bloodGroup" ng-model="bloodGroup" id="bloodGroup" required>
+                                     <md-option ng-repeat="x in bloodGroupAvailability" ng-value="x.group">{{x.group}}</md-option>
+								 </md-select>
+											
+						                 <div ng-messages="projectForm.bloodGroup.$error" role="alert">
+					                         <div ng-message="required" ng-show="projectForm.bloodGroup.$invalid">Blood Group is required </div>
+					                         </div>
+						      
+									        
+								        </md-input-container>
+
+										<!-- Unit -->
+										<md-input-container flex="50" >
+											<label>Unit/Bottle</label>
+											<input type="tel" required maxlength= "50" minlength = "1" id= "unit"  name="unit" ng-model="unit"/>
+											<div ng-messages="projectForm.unit.$error" role="alert">
+					                         <div ng-message="required" ng-show="projectForm.unit.$invalid">Unit/Bottle is required </div>
+					                         </div>
+										</md-input-container>
+
+									</div>
+								</md-card-content>
+
+								<!-- navigation -->
+								
+						<!-- buttons -->
+						<md-card-actions layout="row" layout-align="center">
+				        	<button type="button" class="md-raised md-warn md-button md-ink-ripple" ng-click="PopupFuncFor('resetMsg')" ng-disabled = "!unit && !bloodGroup" >
+                                   Reset
+				        	</button>
+				        	<button type="button" class="md-raised md-warn md-button md-ink-ripple" ng-click="submitData('sucMsg',projectForm);" ng-disabled = "!unit || !bloodGroup" >	Submit
+				        	</button>
+				        </md-card-actions>
+     				</md-card>
+				</md-content>
+				
+	<div style="display: none">
+	  <md-card layout-padding>
+	         <div class="md-dialog-container" id="resetMsg">
+	     	<md-dialog>
+		<div class="popup-svg" align="center">
+			<span><svg style="width: 35px; height: 35px" viewBox="0 0 24 24">
+				    		<path fill="gold" d="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z"></path>
+						</svg></span>
+			<p layout-padding>Are you sure you want to erase all field values?</p>
+			
+			 <md-dialog-actions  layout="row" layout-align="center">
+			    <md-button class="md-raised md-warn md-button md-ink-ripple" id="cancel" ng-click="cancel();" >Cancel</md-button>
+				<md-button class="md-raised md-warn md-button md-ink-ripple" id="ok" ng-click="clearedField(projectForm);" >OK</md-button></md-dialog-actions> 
+			
+		</div>
+		</md-dialog>
+	</div>
+	</md-card>
+    </div>
+	
+	<div style="display: none">
+	  <md-card layout-padding>
+	         <div class="md-dialog-container" id="sucMsg">
+	     	<md-dialog>
+		<div class="popup-svg" align="center">
+			<svg style="width: 35px; height: 35px" viewBox="0 0 24 24">
+    			<path fill="#34A853" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+    		  </svg>
+			<p layout-padding ng-if ="msgAvail">{{resultMsg}} Blood Group is available and added to your Bucket</p>
+			<p layout-padding ng-if ="!msgAvail" > Our stock for this blood group is {{resultMsg}}</p>
+			<md-dialog-actions  layout="row" layout-align="center">
+			    <md-button class="md-raised md-warn md-button md-ink-ripple" id="ok" ng-click="cancel();" >OK</md-button></md-dialog-actions> 
+			
+		</div>
+		</md-dialog>
+	</div>
+	</md-card>
+    </div>
+	 </form>
+	
+		     		
+				
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>			     				
+				<script type="text/javascript" src="./controller/bloodBank.js"></script>
+    
+				</body>
+				</html>
+
+				
